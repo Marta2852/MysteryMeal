@@ -1,0 +1,212 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: min(1400px, calc(100% - 64px));
+    margin: 50px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.recipe {
+    margin-top: 20px;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.missing {
+    color: red;
+}
+
+.recipe-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-image {
+    flex: 1;
+}
+
+.recipe-image img {
+    border-radius: 10px;
+}
+
+.recipe-content {
+    flex: 2;
+    display: flex;
+    gap: 20px;
+}
+
+.ingredients-have {
+    background: #e8f5e9;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.ingredients-have h4 {
+    color: green;
+}
+
+.ingredients-missing {
+    background: #ffebee;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.ingredients-missing h4 {
+    color: #c62828;
+}
+
+.ingredients-missing li {
+    font-weight: bold;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.inline-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.inline-form input {
+    flex: 1;
+    margin: 0;
+}
+
+.inline-form button {
+    width: auto;
+    margin: 0;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.product-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.danger-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.danger-btn:hover {
+    background-color: #d32f2f;
+}
+
+.search-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.search-btn:hover {
+    background-color: #1976D2;
+}
+
+.ingredients-box {
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.have {
+    background: #e8f5e9;
+}
+
+.have h4 {
+    color: green;
+}
+
+.missing {
+    background: #ffebee;
+}
+
+.missing h4 {
+    color: #c62828;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
