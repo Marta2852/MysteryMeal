@@ -6,6 +6,13 @@
 </head>
 <body>
 
+<div style="margin-bottom: 20px;">
+    <a href="{{ route('dashboard') }}" style="display: inline-block; padding: 10px 15px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 15px;">
+        ← Back to Dashboard
+    </a>
+</div>
+    
+
 <div class="container">
 
     <h1>Recipe Finder</h1>

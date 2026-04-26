@@ -58,6 +58,8 @@
     </style>
 </head>
 <body>
+    <div style="margin-bottom: 20px;">
+</div>
     <img id="player" src="https://imgs.search.brave.com/oiN_cMHgBb-ftT8C8P4RhbUNwQCqUW9dn8OZ0dmUxwk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9tYWxl/LWZhcm1lci1ob2xk/aW5nLWJ1cmxhcC1z/YWNrLWdpdmluZy10/aHVtYi11cC1qb3lm/dWwtaXNvbGF0ZWQt/d2hpdGUtYmFja2dy/b3VuZC03OTEwMjM2/OC5qcGc" >
     <div id="apple" class="falling" style="display: none;">
     <img src="https://imgs.search.brave.com/zZJPyeki5OcYowcv5xD52q4pscYsLgX4aVyPK7m5MyI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNDcv/MDAwLzE0My9zbWFs/bC9jYXJ0b29uLWFw/cGxlLWRyYXdpbmct/cG5nLnBuZw" />
