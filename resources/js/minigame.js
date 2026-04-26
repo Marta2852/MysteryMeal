@@ -172,7 +172,7 @@ function timer(){
                 timeString = timeString + seconds;
             }
             document.getElementById('timer').textContent = timeString;
-            duration = duration - (((minutes * 60) + seconds) / 200);
+            duration = duration - 0.1;
             console.log("fall duration: " + duration);
     }, 1000);
 }
