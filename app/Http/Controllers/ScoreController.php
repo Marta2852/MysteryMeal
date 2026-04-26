@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Score;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScoreController extends Controller
 {
@@ -12,54 +13,35 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        //
+        return Score::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function gameover()
     {
-        //
+        $user = Auth::user();
+        $highScore = Score::where('user_id', $user->id)->max('score') ?? 0;
+        $longestTime = Score::where('user_id', $user->id)->max('time') ?? 0;
+        
+        return view('minigame/gameover', [
+            'highScore' => $highScore,
+            'longestTime' => $longestTime
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'user_id' => 'required|integer',
+            'score' => 'required|integer',
+            'time' => 'required|integer',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Score $score)
-    {
-        //
-    }
+        Score::create($validated);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Score $score)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Score $score)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Score $score)
-    {
-        //
+        return response()->json([
+            'success' => true,
+            'score' => $validated['score'],
+            'time' => $validated['time']
+        ]);
     }
 }

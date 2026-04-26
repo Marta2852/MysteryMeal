@@ -10,31 +10,43 @@ var spawnTime = 1000;
 var score = 0;
 var seconds = 0;
 var minutes = 0;
+var gameInitialized = false;
+var spawnInterval;
+var timerInterval;
 const elementList = new Set();
 const foodList = ["apple", "pear", "milk", "knife", "poop"]
 
 let player = document.getElementById("player");
 
-document.getElementById('mouseInput').addEventListener('click', function() {
-    keyboardInput = false;
-    mouseInput = true;
-    console.log('Mouse input enabled');
-    movePlayerMouse(mouseX);
-    player.style.display = 'block';
-    init();
-    track();
-    timer();
-});
-document.getElementById('keyboardInput').addEventListener('click', function() {
-    keyboardInput = true;
-    mouseInput = false;
-    movePlayerMouse(0);
-    playerX = 0;
-    player.style.display = 'block';
-    init();
-    track();
-    timer(); 
-});
+let mouseInputBtn = document.getElementById('mouseInput');
+let keyboardInputBtn = document.getElementById('keyboardInput');
+
+if (mouseInputBtn) {
+    mouseInputBtn.addEventListener('click', function() {
+        keyboardInput = false;
+        mouseInput = true;
+        console.log('Mouse input enabled');
+        movePlayerMouse(mouseX);
+        player.style.display = 'block';
+        init();
+        track();
+        timer();
+    });
+}
+
+if (keyboardInputBtn) {
+    keyboardInputBtn.addEventListener('click', function() {
+        keyboardInput = true;
+        mouseInput = false;
+        movePlayerMouse(0);
+        playerX = 0;
+        player.style.display = 'block';
+        init();
+        track();
+        timer();
+    });
+}
+
 document.addEventListener('mousemove', (event) => {
     mouseX = event.clientX;
     if(mouseInput) {
@@ -107,7 +119,12 @@ function spawnElement() {
   }, duration * 1000);
 }
 function init(){
-    setInterval(() => {
+    if (gameInitialized) {
+        return; // Don't reinitialize if already running
+    }
+    gameInitialized = true;
+    
+    spawnInterval = setInterval(() => {
         spawnElement();
     }, spawnTime);
 }
@@ -134,7 +151,7 @@ function track() {
   requestAnimationFrame(track);
 }
 function timer(){
-    timer = setInterval(() => {
+    timerInterval = setInterval(() => {
         seconds = seconds + 1;
         if(seconds >= 60){
             seconds = 0;
@@ -159,7 +176,38 @@ function timer(){
             console.log("fall duration: " + duration);
     }, 1000);
 }
-function gameOver(){
+function gameOver() {
     console.log("dead");
-    window.location.href = "/minigame/gameover";
+
+    const userId = document.getElementById("userId").textContent;
+    const finalTime = (minutes * 60) + seconds;
+
+    console.log("Sending score:", score, "Time:", finalTime, "UserId:", userId);
+
+    fetch('/scores', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+            user_id: parseInt(userId, 10),
+            score: score,
+            time: finalTime
+        })
+    })
+    .then(response => {
+        console.log("Response status:", response.status);
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+    })
+    .then(data => {
+        console.log("Response data:", data);
+        // Redirect to gameover page with score and time in URL
+        window.location.href = `/minigame/gameover?score=${data.score}&time=${data.time}`;
+    })
+    .catch(err => {
+        console.error("Error saving score:", err);
+        window.location.href = "/minigame/gameover";
+    });
 }
